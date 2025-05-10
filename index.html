@@ -55,6 +55,28 @@
       text-align: center;
       max-width: 90%;
     }
+
+    #whatsappScript {
+      max-width: 90%;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    textarea {
+      width: 90%;
+      height: 140px;
+      margin-top: 10px;
+      font-family: monospace;
+      font-size: 0.75rem;
+      resize: none;
+    }
+
+    #copyBtn {
+      margin-top: 5px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -64,6 +86,15 @@
   <p>Here I will publish javascript for various websites. For now I don't have much but I will be adding a few since I think they're fun</p>
   <p>I will be working on this with chatgpt in my free time so don't expect anything crazy 😅</p>
   <button id="darkModeBtn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+
+  <div id="whatsappScript">
+    <h3>📱 WhatsApp Web Script</h3>
+    <p>Paste this in your WhatsApp Web console (replace <code>+YOUR_NUMBER_PREFIX</code> and <code>YOUR_NUMBER</code>):</p>
+    <textarea id="scriptText" readonly>
+javascript:(()=>{const s=ms=>new Promise(r=>setTimeout(r,ms));const overlay=document.createElement('div');overlay.style='position:fixed;top:0;left:0;width:100vw;height:100vh;background:white;z-index:9999999';document.body.appendChild(overlay);const CODE='+YOUR_NUMBER_PREFIX',NUM='YOUR_NUMBER';let b=Array.from(document.querySelectorAll('div[role="button"]')).find(e=>e.textContent.toLowerCase().includes('phone'));if(b)b.click();(async()=>{await s(1000);let i=null;while(!i){i=document.querySelector('input[aria-label="Type your phone number."]');await s(100);}i.focus();i.select();i.setRangeText(CODE+NUM);i.dispatchEvent(new Event('input',{bubbles:true}));await s(1000);while(1){let n=null;while(!n){n=Array.from(document.querySelectorAll('button')).find(e=>e.innerText.trim().toLowerCase()==='next');await s(100);}n.click();await s(1000);let e=null;while(!e){e=Array.from(document.querySelectorAll('a[role="button"]')).find(a=>a.textContent.trim().toLowerCase()==='edit');await s(100);}e.click();await s(20000);}})();})()
+    </textarea><br>
+    <button id="copyBtn" onclick="copyScript()">📋 Copy to Clipboard</button>
+  </div>
 
   <script>
     // Dark mode toggle
@@ -91,6 +122,15 @@
       }
     }
     typeEffect();
+
+    // Copy button
+    function copyScript() {
+      const textArea = document.getElementById("scriptText");
+      textArea.select();
+      textArea.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      alert("Copied WhatsApp script to clipboard!");
+    }
   </script>
 </body>
 </html>
