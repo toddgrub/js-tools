@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>JS Playground</title>
   <style>
     body {
@@ -10,15 +10,13 @@
       background-color: #f0f0f0;
       color: #222;
       margin: 0;
-      padding: 20px;
+      padding: 0;
       transition: background-color 0.3s, color 0.3s;
     }
-
     .dark-mode {
       background-color: #121212;
       color: #f9f9f9;
     }
-
     #clock {
       position: fixed;
       top: 10px;
@@ -28,7 +26,6 @@
       padding: 4px 8px;
       border-radius: 4px;
     }
-
     #darkModeBtn {
       position: fixed;
       bottom: 10px;
@@ -41,75 +38,62 @@
       border: none;
       border-radius: 4px;
     }
-
     #darkModeBtn:hover {
       background-color: #555;
     }
-
-    h1 {
-      font-size: 1.5rem;
-    }
-
-    #typing {
-      font-size: 1.3rem;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    a {
-      color: #007acc;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    #archive {
-      margin-top: 50px;
-      border-top: 1px solid #ccc;
-      padding-top: 30px;
-    }
-
-    textarea {
-      width: 100%;
-      height: 160px;
-      margin-top: 10px;
-      font-family: monospace;
-      font-size: 0.75rem;
-      resize: none;
-    }
-
-    #copyBtn {
-      margin-top: 5px;
-      padding: 6px 10px;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
     .hidden {
       display: none;
+    }
+    main, section {
+      padding: 2rem;
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    .nav-btns {
+      position: fixed;
+      top: 10px;
+      left: 15px;
+    }
+    .nav-btns button {
+      margin-right: 5px;
+      font-size: 12px;
+      padding: 5px 8px;
+      cursor: pointer;
+    }
+    code {
+      background: rgba(0,0,0,0.05);
+      padding: 5px;
+      display: block;
+      white-space: pre-wrap;
+      font-size: 13px;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
   <div id="clock"></div>
+  <div class="nav-btns">
+    <button onclick="showSection('main')">🏠 Home</button>
+    <button onclick="showSection('whatsapp')">📱 WhatsApp Login Automation</button>
+  </div>
+  <button id="darkModeBtn" onclick="toggleDarkMode()">🌙</button>
 
-  <div id="main">
+  <!-- Main Page -->
+  <main id="main" class="active">
     <h1 id="typing"></h1>
-    <p>Here I will publish javascript for various websites. For now I don't have much but I will be adding a few since I think they're fun</p>
-    <p>I will be working on this with chatgpt in my free time so don't expect anything crazy 😅</p>
-    <a href="#archive">📂 Go to Archive</a>
-  </div>
+    <p>Here I will publish JavaScript for various websites. For now, I don't have much but I will be adding a few since I think they're fun.</p>
+    <p>I will be working on this with ChatGPT in my free time so don't expect anything crazy 😅</p>
+  </main>
 
-  <div id="archive">
+  <!-- WhatsApp Automation Page -->
+  <section id="whatsapp">
     <h2>📱 WhatsApp Login Automation</h2>
-    <p>Paste the code below into the <strong>console</strong> of WhatsApp Web (edit your number first):</p>
-    <textarea id="scriptText" readonly>
-javascript:(()=>{const s=ms=>new Promise(r=>setTimeout(r,ms));const overlay=document.createElement('div');overlay.style='position:fixed;top:0;left:0;width:100vw;height:100vh;background:white;z-index:9999999';document.body.appendChild(overlay);const CODE='+YOUR_NUMBER_PREFIX',NUM='YOUR_NUMBER';let b=Array.from(document.querySelectorAll('div[role="button"]')).find(e=>e.textContent.toLowerCase().includes('phone'));if(b)b.click();(async()=>{await s(1000);let i=null;while(!i){i=document.querySelector('input[aria-label="Type your phone number."]');await s(100);}i.focus();i.select();i.setRangeText(CODE+NUM);i.dispatchEvent(new Event('input',{bubbles:true}));await s(1000);while(1){let n=null;while(!n){n=Array.from(document.querySelectorAll('button')).find(e=>e.innerText.trim().toLowerCase()==='next');await s(100);}n.click();await s(1000);let e=null;while(!e){e=Array.from(document.querySelectorAll('a[role="button"]')).find(a=>a.textContent.trim().toLowerCase()==='edit');await s(100);}e.click();await s(20000);}})();})()
-    </textarea><br>
-    <button id="copyBtn" onclick="copyScript()">📋 Copy to Clipboard</button>
-    <p><a href="#">⬆️ Back to top</a></p>
-  </div>
-
-  <button id="darkModeBtn" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    <p>This bookmarklet helps automate the login process on WhatsApp Web by auto-filling the phone number and clicking through.</p>
+    <p>Drag this link to your bookmarks bar or right-click to copy the code:</p>
+    <a href="javascript:(()=>{const s=ms=>new Promise(r=>setTimeout(r,ms));const overlay=document.createElement('div');overlay.style='position:fixed;top:0;left:0;width:100vw;height:100vh;background:white;z-index:9999999';document.body.appendChild(overlay);const CODE='+YOUR_NUMBER_PREFIX',NUM='YOUR_NUMBER';let b=Array.from(document.querySelectorAll('div[role=&quot;button&quot;]')).find(e=>e.textContent.toLowerCase().includes('phone'));if(b)b.click();(async()=>{await s(1000);let i=null;while(!i){i=document.querySelector('input[aria-label=&quot;Type your phone number.&quot;]');await s(100);}i.focus();i.select();i.setRangeText(CODE+NUM);i.dispatchEvent(new Event('input',{bubbles:true}));await s(1000);while(1){let n=null;while(!n){n=Array.from(document.querySelectorAll('button')).find(e=>e.innerText.trim().toLowerCase()==='next');await s(100);}n.click();await s(1000);let e=null;while(!e){e=Array.from(document.querySelectorAll('a[role=&quot;button&quot;]')).find(a=>a.textContent.trim().toLowerCase()==='edit');await s(100);}e.click();await s(20000);}})();})()" target="_blank">📎 WhatsApp Login Script</a>
+  </section>
 
   <script>
     // Dark mode toggle
@@ -120,7 +104,8 @@ javascript:(()=>{const s=ms=>new Promise(r=>setTimeout(r,ms));const overlay=docu
     // Live clock
     function updateClock() {
       const now = new Date();
-      document.getElementById("clock").textContent = now.toLocaleTimeString();
+      const timeStr = now.toLocaleTimeString();
+      document.getElementById("clock").textContent = timeStr;
     }
     setInterval(updateClock, 1000);
     updateClock();
@@ -137,13 +122,10 @@ javascript:(()=>{const s=ms=>new Promise(r=>setTimeout(r,ms));const overlay=docu
     }
     typeEffect();
 
-    // Copy to clipboard
-    function copyScript() {
-      const textArea = document.getElementById("scriptText");
-      textArea.select();
-      textArea.setSelectionRange(0, 99999);
-      document.execCommand("copy");
-      alert("Copied WhatsApp script to clipboard!");
+    // Page navigation
+    function showSection(id) {
+      document.querySelectorAll('main, section').forEach(el => el.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
   </script>
 </body>
